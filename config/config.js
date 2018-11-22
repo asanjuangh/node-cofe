@@ -18,7 +18,7 @@ let bdUrl;
 if (process.env.NODE_ENV === 'dev') {
     bdUrl = 'mongodb://localhost:27017/cafe';
 } else {
-    bdUrl = 'mongodb://admin:c0f32108nov@ds029807.mlab.com:29807/cofe'
+    bdUrl = process.env.MONGO_DB;
 }
 
 process.env.dbPath = bdUrl;
