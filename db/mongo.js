@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/cafe', (err, resp) => {
+
+mongoose.connect(process.env.dbPath, { useNewUrlParser: true }, (err, resp) => {
     if (err) {
+        console.error(">>> Error conecting to db: " + err);
         throw err;
     }
 
