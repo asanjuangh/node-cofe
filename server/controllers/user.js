@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const bParser = require('body-parser');
 
+const { validateToken } = require('../../middleware/validationToken');
+
 const User = require('../../db/models/users');
+
 const bcrypt = require('bcrypt');
 const _ = require("underscore");
 
@@ -19,7 +22,7 @@ app.use(bParser.json())
 //     res.json('hello world');
 // });
 
-app.get('/users', function(req, res) {
+app.get('/users', validateToken, function(req, res) {
 
     console.log('Getting user pagination...');
     let limit = new Number(req.query.limit) || 5;

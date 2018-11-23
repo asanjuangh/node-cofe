@@ -9,11 +9,19 @@ process.env.PORT = process.env.PORT || 3000;
 //==================================================
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
+//==================================================
+// Secret key
+//==================================================
+process.env.JWT_SEED = process.env.JWT_SEED || 'dev_secret_seed';
+
+//==================================================
+// Expiration time jwt token
+//==================================================
+process.env.JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME || 60 * 60 * 24;
 
 //==================================================
 //  Base de datos
 //==================================================
-
 let bdUrl;
 if (process.env.NODE_ENV === 'dev') {
     bdUrl = 'mongodb://localhost:27017/cafe';
