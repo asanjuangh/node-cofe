@@ -11,12 +11,30 @@ let validateToken = (req, res, next) => {
                 err: err
             });
         }
-
+        req.user = decoded.user;
         next();
     });
 };
 
 
+let validAdmin = (req, res, next) => {
+
+    let sessionUser = req.user;
+
+    console.log('The user: ' + JSON.stringify(sessionUser) + ' the role:' + sessionUser.role);
+
+    if (sessionUser.role !== 'ADMIN_ROLE') {
+        return res.status(401).json({
+            err: true,
+            message: 'It is not a admin user'
+        });
+    } else {
+        next();
+    }
+};
+
+
 module.exports = {
-    validateToken
+    validateToken,
+    validAdmin
 }

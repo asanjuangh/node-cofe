@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bParser = require('body-parser');
 
-const { validateToken } = require('../../middleware/validationToken');
+const validateJWT = require('../../middleware/validationToken');
 
 const User = require('../../db/models/users');
 
@@ -22,7 +22,7 @@ app.use(bParser.json())
 //     res.json('hello world');
 // });
 
-app.get('/users', validateToken, function(req, res) {
+app.get('/users', validateJWT.validateToken, function(req, res) {
 
     console.log('Getting user pagination...');
     let limit = new Number(req.query.limit) || 5;
@@ -51,7 +51,7 @@ app.get('/users', validateToken, function(req, res) {
 });
 
 //Borrado fisico
-app.delete('/users/:id', function(req, res) {
+app.delete('/users/:id', [validateJWT.validateToken, validateJWT.validAdmin], function(req, res) {
     let userId = req.param.id;
     User.deleteOne({ id: userId }, (err, rep) => {
         if (err) {
@@ -68,7 +68,7 @@ app.delete('/users/:id', function(req, res) {
     });
 });
 
-app.post('/users', function(req, res) {
+app.post('/users', [validateJWT.validateToken, validateJWT.validAdmin], function(req, res) {
     let body = req.body;
     let user = new User({
         name: body.name,
@@ -107,7 +107,7 @@ app.post('/users', function(req, res) {
 
 });
 
-app.put('/users/:id', function(req, res) {
+app.put('/users/:id', [validateJWT.validateToken, validateJWT.validAdmin], function(req, res) {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['name', 'email', 'img', 'role', 'status']);

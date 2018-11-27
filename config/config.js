@@ -17,7 +17,7 @@ process.env.JWT_SEED = process.env.JWT_SEED || 'dev_secret_seed';
 //==================================================
 // Expiration time jwt token
 //==================================================
-process.env.JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME || 60 * 60 * 24;
+process.env.JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME || 60 * 60 * 24 * 5;
 
 //==================================================
 //  Base de datos
@@ -32,3 +32,4 @@ if (process.env.NODE_ENV === 'dev') {
 process.env.dbPath = bdUrl;
 
 console.log('The data base: ' + process.env.dbPath);
+console.log('the expiration time = ' + process.env.JWT_EXPIRATION_TIME);
