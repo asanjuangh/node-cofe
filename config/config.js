@@ -15,6 +15,11 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 process.env.JWT_SEED = process.env.JWT_SEED || 'dev_secret_seed';
 
 //==================================================
+// Google client id
+//==================================================
+process.env.GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '125035945532-5kvmtvuhuovvuj7m364sjngac4aprass.apps.googleusercontent.com';
+
+//==================================================
 // Expiration time jwt token
 //==================================================
 process.env.JWT_EXPIRATION_TIME = process.env.JWT_EXPIRATION_TIME || 60 * 60 * 24 * 5;
