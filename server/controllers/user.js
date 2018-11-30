@@ -52,7 +52,7 @@ app.get('/users', validateJWT.validateToken, function(req, res) {
 
 //Borrado fisico
 app.delete('/users/:id', [validateJWT.validateToken, validateJWT.validAdmin], function(req, res) {
-    let userId = req.param.id;
+    let userId = req.params.id;
     User.deleteOne({ id: userId }, (err, rep) => {
         if (err) {
             return res.status(400).json({
